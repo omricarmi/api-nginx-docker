@@ -8,9 +8,11 @@ services:
     build:
       context: ./api
       dockerfile: ./Dockerfile
-    # left port is the port to the world(aka the host). right port is the port inside the container
-    ports:
-      - ${API_PORT}:8000
+      args:
+        - API_PORT=${API_PORT}
+    # # left port is the port to the world(aka the host). right port is the port the container exposed
+    # ports:
+    #   - 8000:${API_PORT}
   
   nginx:
     image: nginx
@@ -19,9 +21,12 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 80:80
+    links:
+      - "api:${API_HOSTNAME}"
     depends_on:
       - api
     environment:
       - API_PORT
+      - API_HOSTNAME
     volumes:
       - ./nginx/debug:/app/output

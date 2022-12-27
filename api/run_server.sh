@@ -1,2 +1,2 @@
 #!/bin/sh
-python3 -m http.server 8000 --bind 0.0.0.0 --directory ./static
+python3 -m http.server ${PORT} --bind 0.0.0.0 --directory ./static

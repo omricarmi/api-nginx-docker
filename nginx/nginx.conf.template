@@ -4,6 +4,6 @@ server {
     listen 80;
 
     location / {
-        proxy_pass http://0.0.0.0:${API_PORT};
+        proxy_pass http://${API_HOSTNAME}:${API_PORT};
     }
 }

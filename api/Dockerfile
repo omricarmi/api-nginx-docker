@@ -1,8 +1,10 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
 FROM python:3.7
 
+ARG API_PORT
+
 # port that container exposes. docker compose can map this to a port on the host.
-EXPOSE 8000
+EXPOSE $API_PORT
 
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -14,4 +16,6 @@ COPY . /api/
 
 WORKDIR /api
 
-CMD ["python", "-m", "http.server", "8000", "--bind", "0.0.0.0", "--directory", "./static"]
+ENV PORT=$API_PORT
+
+ENTRYPOINT [ "./run_server.sh" ]
