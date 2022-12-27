@@ -1,0 +1,9 @@
+# nginx proxy server
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://0.0.0.0:${API_PORT};
+    }
+}

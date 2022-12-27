@@ -11,3 +11,15 @@ services:
     # left port is the port to the world(aka the host). right port is the port inside the container
     ports:
       - ${API_PORT}:8000
+  
+  nginx:
+    image: nginx
+    build:
+      context: ./nginx
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - api
+    environment:
+      - API_PORT
